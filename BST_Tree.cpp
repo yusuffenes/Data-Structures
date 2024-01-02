@@ -57,7 +57,7 @@ void postOrder(node* current)  //LRN
     }
 }
 
-node *Ekle(node* node,int key) 
+node *add(node* node,int key) 
 {
     if (node==nullptr)
     {
@@ -65,11 +65,11 @@ node *Ekle(node* node,int key)
     }
     if (key<node->data)
     {
-        node->left = Ekle(node->left, key);
+        node->left = add(node->left, key);
     }
     else if (key>node->data)
     {
-        node->right = Ekle(node->right, key);
+        node->right = add(node->right, key);
     }
     return node;
 
@@ -104,7 +104,7 @@ node* search(int searched)
     return current;
 }
 
-node* enKucukDeger(node* current)
+node* findMinValue(node* current)
 {
     while (current->left != nullptr) {
         current = current->left;
@@ -112,7 +112,7 @@ node* enKucukDeger(node* current)
     return current;
 }
 
-node* enBuyukDeger(node* current) {
+node* findMaxValue(node* current) {
     while (current->right != nullptr) {
         current = current->right;
     }
@@ -143,7 +143,7 @@ node* deleteNode(node* current, int key) {
         }
 
         
-        node* temp = enKucukDeger(current->right);
+        node* temp = findMinValue(current->right);
         current->data = temp->data;
         current->right = deleteNode(current->right, temp->data);
     }
@@ -256,7 +256,7 @@ int main()
             int eklenecekSayi;
             cout << "Eklenecek Sayi: ";
             cin >> eklenecekSayi;
-            Ekle(root, eklenecekSayi);
+            add(root, eklenecekSayi);
             cout << "Sayi basariyla eklendi.\n";
             break;
         case 2:
@@ -311,8 +311,8 @@ int main()
             cout << "Agac Yuksekligi: " << height(root) << endl;
             break;
         case 6:
-            cout << "En Kucuk Deger: " << enKucukDeger(root)->data << endl;
-            cout << "En Buyuk Deger: " << enKucukDeger(root)->data << endl;
+            cout << "En Kucuk Deger: " << findMinValue(root)->data << endl;
+            cout << "En Buyuk Deger: " << findMaxValue(root)->data << endl;
             break;
         case 7:
             int targetDepth;
